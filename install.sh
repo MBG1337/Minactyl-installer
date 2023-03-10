@@ -130,7 +130,7 @@ reverseproxy_configuration() {
    echo "What is your domain? [example.com]"
    read DOMAIN
    apt install nginx
-   sudo wget -O /etc/nginx/conf.d/Minactyl.conf https://raw.githubusercontent.com/Minactyl/Minactyl-installer/main/NginxHTTPReverseProxy.conf
+   sudo wget -O /etc/nginx/conf.d/Minactyl.conf https://raw.githubusercontent.com/MBG1337/Minactyl-installer/main/NginxHTTPReverseProxy.conf
    sudo apt-get install jq 
    port=$(jq -r '.["website"]["port"]' /var/www/Minactyl/settings.json)
    sed -i 's/PORT/'$port'/g' /etc/nginx/conf.d/Minactyl.conf
