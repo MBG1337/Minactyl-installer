@@ -99,7 +99,8 @@ settings_configuration() {
     sed -i -e 's/"port":.*/"port": '$WEBPORT',/' -e 's/"secret":.*/"secret": "'$WEB_SECRET'"/' -e 's/"domain":.*/"domain": "'$PTERODACTYL_DOMAIN'",/' -e 's/"key":.*/"key": "'$PTERODACTYL_KEY'"/' -e 's/"id":.*/"id": "'$DOAUTH_ID'",/' -e 's/"link":.*/"link": "'$DOAUTH_LINK'",/' -e 's/"path":.*/"path": "'$DOAUTH_CALLBACKPATH'",/' -e 's/"prompt":.*/"prompt": '$DOAUTH_PROMPT'/' -e '0,/"secret":.*/! {0,/"secret":.*/ s/"secret":.*/"secret": "'$DOAUTH_SECRET'",/}' $file
     echo "-------------------------------------------------------"
     echo "Main Configuration Settings Completed!"
-    echo "Some Configuration need to setup manually"
+    echo "Some Configuration is needed to be setup manually"
+    echo "Please fill your company name in settings.json or the client will be buggy and may break"
 }
 reverseproxy_configuration() {
     echo "-------------------------------------------------------"
