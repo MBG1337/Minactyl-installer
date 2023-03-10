@@ -1,19 +1,19 @@
 set -e
 clear
-echo "=============================="
-echo "ᴍɪɴᴀᴄᴛʏʟ ɪɴꜱᴛᴀʟʟᴀᴛɪᴏɴ ꜱᴄʀɪᴘᴛ"
-echo "=============================="
-echo "This script is only made for Ubuntu and Debian"
-echo "Using this on other softwares will not work, if this causes any issues, we are not responsible"
-echo ===================================================================================================
+echo "====================="
+echo "Minactyl Installer"
+echo "====================="
+echo "Note that this install"
+echo "Is just for ubuntu/debain"
+echo ========================================
 
 install_options(){
     echo "Please select your installation option:"
-    echo "[1] All in one Minactyl installation (including settings, reverseproxy, etc.)"
-    echo "[2] Download the dependencies for Minactyl."
-    echo "[3] Install Minactyl files"
-    echo "[4] Configure Minactyl Settings"
-    echo "[5] Configure Nginx reverse proxy"
+    echo "[1] Full Fresh Minactyl Install (Dependercies, Files, Configuration)"
+    echo "[2] Install the Dependercies."
+    echo "[3] Install the Files."
+    echo "[4] Configure Settings."
+    echo "[5] Create and configure a reverse proxy."
     echo "========================================"
     read choice
     case $choice in
@@ -45,7 +45,7 @@ install_options(){
 
 dependercy_install() {
     echo "======================================================"
-    echo "installing dependencies for Minactyl......."
+    echo "Starting Dependercy install."
     echo "======================================================"
     sudo apt update
     sudo apt upgrade
@@ -53,12 +53,12 @@ dependercy_install() {
     sudo apt install npm
     sudo apt-get install git
     echo "======================================================"
-    echo "Dependecies installed!"
+    echo "Dependency Install Completed!"
     echo "======================================================"
 }
 file_install() {
     echo "======================================================"
-    echo "Downloading Minactyl files........"
+    echo "Starting File download."
     echo "======================================================"
     cd /var/www/
     sudo git clone https://github.com/MBG1337/Minactyl/
@@ -66,13 +66,14 @@ file_install() {
     sudo npm install
     sudo npm install forever -g
     echo "======================================================"
-    echo "Files for Minactyl Sucessfully downloaded!"
+    echo "Minactyl File Download Completed!"
     echo "======================================================"
 }
 settings_configuration() {
     echo "======================================================"
-    echo "Launching settings configuration setup."
-    echo "Read the documents for more information"
+    echo "Starting Settings Configuration."
+    echo "Read the Docs for more information about the settings."
+    echo "soon"
     echo "======================================================"
     cd /var/www/Minactyl/
     file=settings.json
@@ -98,12 +99,12 @@ settings_configuration() {
     sed -i -e 's/"port":.*/"port": '$WEBPORT',/' -e 's/"secret":.*/"secret": "'$WEB_SECRET'"/' -e 's/"domain":.*/"domain": "'$PTERODACTYL_DOMAIN'",/' -e 's/"key":.*/"key": "'$PTERODACTYL_KEY'"/' -e 's/"id":.*/"id": "'$DOAUTH_ID'",/' -e 's/"link":.*/"link": "'$DOAUTH_LINK'",/' -e 's/"path":.*/"path": "'$DOAUTH_CALLBACKPATH'",/' -e 's/"prompt":.*/"prompt": '$DOAUTH_PROMPT'/' -e '0,/"secret":.*/! {0,/"secret":.*/ s/"secret":.*/"secret": "'$DOAUTH_SECRET'",/}' $file
     echo "-------------------------------------------------------"
     echo "Main Configuration Settings Completed!"
-    echo "IMPORTANT : Please go into settings.json and fill in your company details or your client may break."
+    echo "Some Configuration need to setup manually"
 }
 reverseproxy_configuration() {
     echo "-------------------------------------------------------"
     echo "Starting Reverse Proxy Configuration."
-    echo "This is going to forward your.client.domain:port to your.client.domain "
+    echo "Read the Docs for more infomration about the Configuration."
     echo "https://josh0086.gitbook.io/dashactyl/"
     echo "-------------------------------------------------------"
 
@@ -149,7 +150,7 @@ reverseproxy_configuration() {
    fi
 }
 update_check() {
-    latest=$(wget https://raw.githubusercontent.com/Minactyl/Minactyl-installer/main/version.json -q -O -)
+    latest=$(wget https://raw.githubusercontent.com/MBG1337/Minactyl-installer/main/version.json -q -O -)
     #latest='"version": "0.1.2-themes6",'
     version=$(grep -Po '"version":.*?[^\\]",' /var/www/Minactyl/settings.json) 
 
